@@ -129,5 +129,4 @@ def query(sql):
 
     rows = cur.fetchall()
 
-    for row in rows:
-        print(row)
+    return rows
