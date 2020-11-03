@@ -1,0 +1,36 @@
+1
+Medellin
+Cali
+489
+25874
+Juan Jose Hoyos Urcue
+423
+1112496448
+2
+Yolanda
+45
+1
+123
+Ramiro
+45
+0
+123456
+1
+Medellin
+Bogota
+500
+4444444444
+Juan Jose Hoyos Urcue
+600
+1112496448
+2
+Yolanda
+45
+1
+123
+Ramiro
+45
+0
+123456
+2
+

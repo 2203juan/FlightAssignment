@@ -1,0 +1,31 @@
+h1 {
+    text-align:center;
+}
+
+h2{
+	text-align: center;
+}
+
+form { 
+	text-align: center;
+}
+
+.padre {
+  text-align: center;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color: #002B44;
+  color: #ffff;
+
+}
+
+.pintamelo{
+	background-color: #7BC8F4;
+	width: 50%;
+}
