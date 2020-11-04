@@ -60,3 +60,7 @@ class PasForm(FlaskForm):
 class numeroVueloForm(FlaskForm):
 	nroVuelo = IntegerField('Numero de vuelo:', validators = [nroVueloCheck] )
 	submit = SubmitField('Consultar')
+
+class idPilotoForm(FlaskForm):
+	idPiloto = IntegerField('Id piloto:', validators = [nroVueloCheck] )
+	submit = SubmitField('Consultar')

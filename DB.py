@@ -130,3 +130,5 @@ def query(sql):
     rows = cur.fetchall()
 
     return rows
+
+createDB()

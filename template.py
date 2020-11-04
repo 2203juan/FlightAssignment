@@ -19,17 +19,10 @@ class ItemTable(Table):
     name = Col('Name')
     description = Col('Description')
 
-# Get some objects
-class Item(object):
-    def __init__(self, name, description):
-        self.name = name
-        self.description = description
-
 
 @app.route("/")
 def index():
 	if len(infoVuelo) and len(infoPasajeros):
-		db.createDB()
 		ciudadA =  infoVuelo[0]
 		ciudadB = infoVuelo[1]
 		nroPuestos = infoVuelo[2]
@@ -132,27 +125,56 @@ def consultarPorNumero():
 		nroVuelo = form.nroVuelo.data
 		query = db.query("SELECT * FROM VUELO WHERE numeroVuelo = {}".format(nroVuelo))
 		
-		items = []
+		items = {
+			'Numero de vuelo': list(),
+			'Ciudad de salida': list(),
+			'Ciudad de llegada': list(),
+			'Numero de puestos': list(),
+			'ID piloto': list(),
+			'ID pasajero':list()
+
+		}
+
 		for row in query:
-			items.append(Item('Numero de vuelo', row[0]))
-			items.append(Item('Ciudad de salida', row[1]))
-			items.append(Item('Ciudad de llegada', row[2]))
-			items.append(Item('Numero de puestos', row[3]))
-			items.append(Item('ID piloto', row[4]))
-			items.append(Item('ID pasajero', row[5]))	
+			if row[0] not in items['Numero de vuelo']:
+				items['Numero de vuelo'].append(row[0])
+				items['Ciudad de salida'].append(row[1])
+				items['Ciudad de llegada'].append(row[2])
+				items['Numero de puestos'].append(row[3])
+				items['ID piloto'].append(row[4])
+
+			items['ID pasajero'].append(row[5])	
 
 		# Populate the table
-		table = ItemTable(items)
 
 		# Print the html
-		render_template(table.__html__())
+
+		return render_template("resultconsultarPorNumero.html", result = items)
 
 	return render_template("consultarPorNumero.html",form = form)
 
+@app.route("/consultarPorPiloto", methods=["GET", "POST"])
+def consultarPorPiloto():
+	form = forms.idPilotoForm()
+	if form.validate_on_submit():
+		idPiloto = form.idPiloto.data
+		query = db.query("SELECT numeroVuelo,ciudadSalida,ciudadLlegada FROM VUELO WHERE idPiloto = {}".format(idPiloto))
+		
+		items = {}
 
+		for row in query:
+			print(row)
+			if items.get(row[0])== None:
+				items[row[0]] = (row[1],row[2])
+		print(items)
+		# Populate the table
 
+		# Print the html
 
+		return render_template("resultconsultarPorPiloto.html", result = items)
+	
 
+	return render_template("consultarPorPiloto.html",form = form)
 
 
 

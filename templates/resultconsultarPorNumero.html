@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% block content %}
+	<br>
+	<div class="container">
+		<table class="center">
+	        {% for key, value in result.items() %}
+				<th> {{ key }} </th>
+            	<td> {{ value }} </td>
+
+	        {% endfor %}
+	    </table> 
+	</div>
+
+	<br><br><br><br><br>
+
+{% endblock %}
