@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% block content %}
+	<br>
+	<div class="container">
+		<h1>Reserva Exitosa</h1><br>
+		<h3 style="background-color: #C3DCEA ; text-align: center;">Datos de la Reserva</h3><br>
+	</div>
+
+	<div class="container">
+		<table class="center">
+		  	</tr>
+	        {% for key, value in result.items() %}
+	        	<tr>
+		        	<th> {{ key }} </th>
+		        	<td> {{ value }} </td>
+		        </tr>
+	        {% endfor %}
+	    </table> 
+	</div>
+
+	<br><br><br><br><br>
+
+{% endblock %}

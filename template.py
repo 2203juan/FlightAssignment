@@ -8,7 +8,7 @@ import vuelo as v
 import persona as p
 import DB as db
 import login as lg
-import time
+
 
 infoVuelo = list()
 infoPasajeros = list()
@@ -190,6 +190,54 @@ def login():
 @app.route('/about')
 def about():
 	return render_template('sobre_nosotros.html')
+
+@app.route('/reserva',methods = ['GET', 'POST'])
+def reserva():
+	form = forms.buyForm()
+	if form.validate_on_submit():
+
+		ciudades = {"1":'Medellin', "2":'Bogota',"3":'Cali',"4":'San Andrés',"5":'Cartagena'}
+		nombre = form.nombre.data
+		cedula = form.cedula.data
+		edad = form.edad.data
+		ciudadA = form.ciudadA.data
+		ciudadB = form.ciudadB.data
+		cantidadPersonas = form.cantidadPersonas.data
+
+		monto_base = 300000
+		descuento = 0 
+
+
+		if ciudadA == "1" or ciudadA == "2" or ciudadA == "3":
+			descuento += 0.2# si la ciudad de salida es Medellin,Bogota o Cali se descuenta un 20%
+
+		if  1<= edad <= 5:
+			descuento += 0.6
+
+		if 5 < edad <= 10:
+			descuento += 0.3
+		
+		if  10 < edad	<= 18:
+			descuento += 0.2
+
+
+		monto_por_persona = monto_base*(1-descuento)
+
+		if cantidadPersonas > 3:
+			monto_por_persona = monto_por_persona*(1-0.1)
+
+		montoTotal = cantidadPersonas*monto_por_persona
+
+		montoTotal  = "${:,.2f}".format(montoTotal)
+
+
+
+		items = {"Nombre": nombre,"Cedula": cedula, "Edad": edad,"Ciudad de Salida":ciudades[ciudadA],"Ciudad de Llegada":ciudades[ciudadB],"Nro Personas": cantidadPersonas,"Monto Reserva": montoTotal}
+
+		print(items)
+		return render_template("confirmacion.html", result = items)
+
+	return render_template("reserva.html", form = form)
 
 
 def main():

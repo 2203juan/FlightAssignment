@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+{% block content %}
+	<br>
+	<div class="container pintamelo">
+		<form action="" method="post" novalidate>
+			{{ form.hidden_tag() }}
+			<br><br>
+			<div class="form-group">
+	            {{ form.nombre.label }}
+	            {{ form.nombre(size=64) }}<br>
+	            {% for error in form.nombre.errors %}
+	            <span style="color: red;">{{ error }}</span>
+	            {% endfor %}
+		    </div>
+
+		    <div class="form-group">
+	            {{ form.cedula.label }}
+	            {{ form.cedula(size=64) }}<br>
+	            {% for error in form.cedula.errors %}
+	            <span style="color: red;">{{ error }}</span>
+	            {% endfor %}
+		    </div>
+
+		    <div class="form-group">
+	            {{ form.edad.label }}
+	            {{ form.edad(size=64) }}<br>
+	            {% for error in form.edad.errors %}
+	            <span style="color: red;">{{ error }}</span>
+	            {% endfor %}
+		    </div>
+
+		    <div class="form-group">
+	            {{ form.ciudadA.label }}
+	            {{ form.ciudadA(size= 1) }}<br>
+	            {% for error in form.ciudadA.errors %}
+	            <span style="color: red;">{{ error }}</span>
+	            {% endfor %}
+
+		    </div>
+		    <div class="form-group">
+	            {{ form.ciudadB.label }}
+	            {{ form.ciudadB(size=1) }}<br>
+	            {% for error in form.ciudadB.errors %}
+	            <span style="color: red;">{{ error }}</span>
+	            {% endfor %}
+		    </div>
+		    <div class="form-group">
+	            {{ form.cantidadPersonas.label }}
+	            {{ form.cantidadPersonas(size=64) }}<br>
+	            {% for error in form.cantidadPersonas.errors %}
+	            <span style="color: red;">{{ error }}</span>
+	            {% endfor %}
+		    </div>
+
+		   	<div>
+				{{ form.submit(class_ = "btn btn-primary") }}<br><br>
+		     </div>
+		</form>
+	</div>
+
+	<br><br><br><br><br>
+{% endblock %}

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, RadioField
+from wtforms import StringField, SubmitField, IntegerField, RadioField, SelectField
 from wtforms.validators import DataRequired, Length,NumberRange,ValidationError
 
 
@@ -63,4 +63,13 @@ class numeroVueloForm(FlaskForm):
 
 class idPilotoForm(FlaskForm):
 	idPiloto = IntegerField('Id piloto:', validators = [nroVueloCheck] )
+	submit = SubmitField('Consultar')
+
+class buyForm(FlaskForm):
+	nombre = StringField('Nombre :', validators = [DataRequired(), Length(max=64)])
+	cedula = IntegerField('Cedula:', validators = [cedulaCheck] )
+	edad = IntegerField('Edad:', validators = [edadCheck] )
+	ciudadA = SelectField(u'Ciudad de Salida', choices=[(1, 'Medellin'), (2, 'Bogota'), (3, 'Cali'), (4, 'San Andrés'), (5, 'Cartagena')])
+	ciudadB = SelectField(u'Ciudad de Llegada', choices=[(1, 'Medellin'), (2, 'Bogota'), (3, 'Cali'), (4, 'San Andrés'), (5, 'Cartagena')])
+	cantidadPersonas = IntegerField('Cantidad de personas:', validators = [edadCheck] )
 	submit = SubmitField('Consultar')
