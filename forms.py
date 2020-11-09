@@ -72,4 +72,9 @@ class buyForm(FlaskForm):
 	ciudadA = SelectField(u'Ciudad de Salida', choices=[(1, 'Medellin'), (2, 'Bogota'), (3, 'Cali'), (4, 'San Andrés'), (5, 'Cartagena')])
 	ciudadB = SelectField(u'Ciudad de Llegada', choices=[(1, 'Medellin'), (2, 'Bogota'), (3, 'Cali'), (4, 'San Andrés'), (5, 'Cartagena')])
 	cantidadPersonas = IntegerField('Cantidad de personas:', validators = [edadCheck] )
-	submit = SubmitField('Consultar')
+	submit = SubmitField('Reservar')
+
+class luggageForm(FlaskForm):
+	cedula = IntegerField('Cedula:', validators = [cedulaCheck] )
+	peso = IntegerField('Peso (Kg) del equipaje:', validators = [edadCheck] )
+	submit = SubmitField('Reservar')

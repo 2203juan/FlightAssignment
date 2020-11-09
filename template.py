@@ -239,6 +239,46 @@ def reserva():
 
 	return render_template("reserva.html", form = form)
 
+@app.route('/reserva_equipaje',methods = ['GET', 'POST'])
+def reserva_equipaje():
+	form = forms.luggageForm()
+	if form.validate_on_submit():
+
+		cedula = form.cedula.data
+		peso = form.peso.data
+
+		monto_base = 60000
+		excedente = 0
+
+		# entre 1 y 23 kg vale 60.000
+
+		# por cada kg adicional se cobran 3000 pesos
+		if 23 < peso <= 50:
+			excedente = (peso - 23)*3000
+
+		# por cada kg adicional se cobran 5000 pesos
+		elif 50< peso <=70:
+			excedente = (peso-20)*5000
+
+		# por cada kg adicional se cobran 5000 pesos
+		else:
+			excedente = (peso -70)*7000
+
+
+
+
+		montoTotal = monto_base + excedente
+
+		montoTotal  = "${:,.2f}".format(montoTotal)
+
+
+
+		items = {"Cedula": cedula, "Monto Reserva Equipaje": montoTotal}
+
+		print(items)
+		return render_template("confirmacion_equipaje.html", result = items)
+
+	return render_template("reserva_equipaje.html", form = form)
 
 def main():
 	app.run(debug = True, port = 8000)
