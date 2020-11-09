@@ -7,20 +7,18 @@ import forms
 import vuelo as v
 import persona as p
 import DB as db
-from flask_table import Table, Col
-
+import login as lg
+import time
 
 infoVuelo = list()
 infoPasajeros = list()
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe'
-
-class ItemTable(Table):
-    name = Col('Name')
-    description = Col('Description')
+db.createDB()
 
 
-@app.route("/")
+@app.route("/index")
 def index():
 	if len(infoVuelo) and len(infoPasajeros):
 		ciudadA =  infoVuelo[0]
@@ -175,6 +173,20 @@ def consultarPorPiloto():
 	
 
 	return render_template("consultarPorPiloto.html",form = form)
+
+@app.route('/', methods=['GET', 'POST'])
+def login():
+	form = lg.LoginForm()
+
+	if form.validate_on_submit():
+		db.insertarAdmin(('juanhu2203@gmail.com','Pruebas2020'))
+		real = db.query("SELECT * FROM ADMIN")
+		user = form.email.data
+		password = form.password.data
+		if user == real[0][0] and password == real[0][1]:
+			return redirect(url_for('index'))
+			
+	return render_template('login.html', form = form)
 
 
 

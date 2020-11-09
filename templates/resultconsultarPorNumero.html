@@ -4,8 +4,19 @@
 	<div class="container">
 		<table class="center">
 	        {% for key, value in result.items() %}
-				<th> {{ key }} </th>
-            	<td> {{ value }} </td>
+				<tr>
+					{% if key == "ID pasajero"%}
+						{% for elem in value %}
+							<tr>
+								<th> {{ key }} </th>
+							    <th> {{ elem }} </th>
+						    </tr>
+						{% endfor %}
+					{% else %}
+						<th> {{ key }} </th>
+		            	<td> {{ value }} </td>
+		            {% endif %}
+	            </tr>
 
 	        {% endfor %}
 	    </table> 

@@ -60,6 +60,11 @@ def createDB():
 
                             );"""
 
+    tabla_admin = """CREATE TABLE IF NOT EXISTS ADMIN (
+                                correo text NOT NULL,
+                                clave text NOT NULL
+                            );"""
+
     # create a database connection
     conn = create_connection(database)
 
@@ -73,6 +78,10 @@ def createDB():
 
         # crear tabla vuelo
         create_table(conn, tabla_vuelo)
+
+        # crear tabla administradores
+        create_table(conn, tabla_admin)
+
     else:
         print("Error! cannot create the database connection.")
 
@@ -111,6 +120,18 @@ def insertarVuelo(vuelo):
     conn.commit()
 
     return cur.lastrowid
+
+def insertarAdmin(admin):
+    database = r"fly.db"
+    conn = create_connection(database)
+    sql = ''' INSERT INTO ADMIN (correo,clave)
+              VALUES(?,?) '''
+
+    cur = conn.cursor()
+    cur.execute(sql, admin)
+    conn.commit()
+
+    return cur.lastrowid
 #createDB()
 
 #crearPasajero((123,"Juan",20,0,1234456))
@@ -131,4 +152,4 @@ def query(sql):
 
     return rows
 
-createDB()
+
