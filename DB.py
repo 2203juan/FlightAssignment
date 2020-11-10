@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 
+database = r"fly.db"
 
 def create_connection(db_file):
     """ create a database connection to the SQLite database
@@ -31,7 +32,6 @@ def create_table(conn, create_table_sql):
 
 
 def createDB():
-    database = r"fly.db"
 
     tabla_piloto = """ CREATE TABLE IF NOT EXISTS PILOTO (
                                         idPiloto integer,
@@ -86,7 +86,6 @@ def createDB():
         print("Error! cannot create the database connection.")
 
 def crearPasajero(pasajero):
-    database = r"fly.db"
     conn = create_connection(database)
     sql = ''' INSERT INTO PASAJERO (cedulaPasajero,nombre,edad,genero,nroVuelo)
               VALUES(?,?,?,?,?) '''
@@ -98,7 +97,6 @@ def crearPasajero(pasajero):
     return cur.lastrowid
 
 def crearPiloto(piloto):
-    database = r"fly.db"
     conn = create_connection(database)
     sql = ''' INSERT INTO PILOTO (idPiloto,nombre,horasVuelo)
               VALUES(?,?,?) '''
@@ -110,7 +108,6 @@ def crearPiloto(piloto):
     return cur.lastrowid
 
 def insertarVuelo(vuelo):
-    database = r"fly.db"
     conn = create_connection(database)
     sql = ''' INSERT INTO VUELO (numeroVuelo,ciudadSalida,ciudadLlegada,numeroPuestos,idPiloto,idPasajero)
               VALUES(?,?,?,?,?,?) '''
@@ -122,7 +119,6 @@ def insertarVuelo(vuelo):
     return cur.lastrowid
 
 def insertarAdmin(admin):
-    database = r"fly.db"
     conn = create_connection(database)
     sql = ''' INSERT INTO ADMIN (correo,clave)
               VALUES(?,?) '''
@@ -138,7 +134,6 @@ def insertarAdmin(admin):
 #crearPasajero((123,"Juan",20,0,4444))
 
 def query(sql):
-    database = r"fly.db"
     conn = create_connection(database)
     """
     Query all rows in the tasks table

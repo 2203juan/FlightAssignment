@@ -281,6 +281,6 @@ def reserva_equipaje():
 	return render_template("reserva_equipaje.html", form = form)
 
 def main():
-	app.run(debug = True, port = 8000)
+	app.run(debug = True, port = 8080)
 
 main()
