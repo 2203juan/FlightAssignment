@@ -13,25 +13,25 @@ class Piloto(Persona):
 	"""
 	Clase que representa a un piloto de la compañia
 	"""
-	def __init__(self, id, nombre, horasVuelo):
+	def __init__(self, id, nombre, horas_vuelo):
 
 		# Se invoca al constructor de la clase persona
 
 		Persona.__init__(self, nombre)
-		self.horasVuelo = horasVuelo
+		self.horas_vuelo = horas_vuelo
 		self.id = id
 
-	def setHorasVuelo(self, h):
-		self.horasVuelo = h
+	def setHo_vasVuelo(self, h):
+		self.horas_vuelo = h
 
-	def get_horasVuelo(self):
-		return self.horasVuelo
+	def get_horas_vuelo(self):
+		return self.horas_vuelo
 
 	def get_id(self):
 		return self.id
 
 	def verPiloto(self):
-		return [self.get_id(),self.get_nombre(),self.get_horasVuelo()]
+		return [self.get_id(),self.get_nombre(),self.get_horas_vuelo()]
 
 class Pasajero(Persona):
 	"""
