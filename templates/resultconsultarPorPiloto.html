@@ -4,14 +4,14 @@
 	<div class="container">
 		<table class="center">
 			<tr>
-			    <th>Nro vuelo</th>
-			    <th>CiudadSalida / CiudadLlegada</th>
+			    <th scope="col">Nro vuelo</th>
+			    <th scope="col">CiudadSalida / CiudadLlegada</th>
 		  	</tr>
 	        {% for key, value in result.items() %}
 					{% for item in value %}
 					<tr>
-						<th> {{ key }} </th>
-					    <td> {{ item }} </td>
+						<th scope="row"> {{ key }} </th>
+					    <td scope="row"> {{ item }} </td>
 					 </tr>
 					{% endfor %}
 	        {% endfor %}
