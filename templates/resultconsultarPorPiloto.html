@@ -3,6 +3,9 @@
 	<br>
 	<div class="container">
 		<table class="center">
+
+			<caption style = "text-align: center;"> Tabla de información del piloto solicitado</caption>
+			
 			<tr>
 			    <th scope="col">Nro vuelo</th>
 			    <th scope="col">CiudadSalida / CiudadLlegada</th>
@@ -11,7 +14,7 @@
 					{% for item in value %}
 					<tr>
 						<th scope="row"> {{ key }} </th>
-					    <td scope="row"> {{ item }} </td>
+					    <td> {{ item }} </td>
 					 </tr>
 					{% endfor %}
 	        {% endfor %}
