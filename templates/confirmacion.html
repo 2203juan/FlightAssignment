@@ -8,10 +8,11 @@
 
 	<div class="container">
 		<table class="center">
+			<caption style = "text-align: center;"> Tiquete de Reserva, por favor conservalo y presentalo en el aeropuerto</caption>
 		  	</tr>
 	        {% for key, value in result.items() %}
 	        	<tr>
-		        	<th> {{ key }} </th>
+		        	<th scope="row"> {{ key }} </th>
 		        	<td> {{ value }} </td>
 		        </tr>
 	        {% endfor %}
