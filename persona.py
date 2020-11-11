@@ -38,14 +38,14 @@ class Pasajero(Persona):
 	Clase que representa a un pasajero 
 	"""
 
-	def __init__(self, cedula, nombre, edad, genero, nroVuelo):
+	def __init__(self, cedula, nombre, edad, genero, numero_vuelo):
 
 		# Se invoca al constructor de la clase persona
 		Persona.__init__(self,nombre)
 		self.edad = edad
 		self.genero = genero # 0 para hombre 1 para mujer
 		self.id = cedula
-		self.nroVuelo = nroVuelo
+		self.numero_vuelo = numero_vuelo
 
 	def get_edad(self):
 		return self.edad
@@ -61,8 +61,8 @@ class Pasajero(Persona):
 
 	def get_id(self):
 		return self.id
-	def get_nroVuelo(self):
-		return self.nroVuelo
+	def get_numero_vuelo(self):
+		return self.numero_vuelo
 
 	def verPasajero(self):
-		return [self.get_id(),self.get_nombre(),self.get_edad(),self.get_genero(),self.get_nroVuelo()]
+		return [self.get_id(),self.get_nombre(),self.get_edad(),self.get_genero(),self.get_numero_vuelo()]
