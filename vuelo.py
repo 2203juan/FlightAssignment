@@ -10,29 +10,29 @@ class Vuelo(object):
 		self.pasajeros = list()
 		self.nroVuelo = nroVuelo
 
-	def get_CiudadSalida(self):
+	def get_ciudadSalida(self):
 		return self.ciudadSalida
 
-	def get_CiudadLlegada(self):
+	def get_ciudadLlegada(self):
 		return self.ciudadLlegada
 
-	def get_NumeroPuestos(self):
+	def get_numeroPuestos(self):
 		return self.numeroPuestos
 
-	def get_Piloto(self):
+	def get_piloto(self):
 		return self.piloto.verPiloto()
 
 	def agregarPasajero(self, p):
 		self.pasajeros.append(p)
 
-	def get_Pasajeros(self):
+	def get_pasajeros(self):
 		return self.pasajeros
 
-	def get_NroVuelo(self):
+	def get_nroVuelo(self):
 		return self.nroVuelo
 
 	def verVuelo(self):
-		return [self.get_NroVuelo(),self.get_CiudadSalida(), self.get_CiudadLlegada(), self.get_NumeroPuestos(), self.get_Piloto(), self.get_Pasajeros()]
+		return [self.get_nroVuelo(),self.get_ciudadSalida(), self.get_ciudadLlegada(), self.get_numeroPuestos(), self.get_piloto(), self.get_pasajeros()]
 
 """
 def main():

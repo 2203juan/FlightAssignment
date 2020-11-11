@@ -6,7 +6,7 @@ class Persona(object):
 	def __init__(self, nombre):
 		self.nombre = nombre
 
-	def get_Nombre(self):
+	def get_nombre(self):
 		return self.nombre
 
 class Piloto(Persona):
@@ -24,14 +24,14 @@ class Piloto(Persona):
 	def setHorasVuelo(self, h):
 		self.horasVuelo = h
 
-	def get_HorasVuelo(self):
+	def get_horasVuelo(self):
 		return self.horasVuelo
 
-	def get_Id(self):
+	def get_id(self):
 		return self.id
 
 	def verPiloto(self):
-		return [self.get_Id(),self.get_Nombre(),self.get_HorasVuelo()]
+		return [self.get_id(),self.get_nombre(),self.get_horasVuelo()]
 
 class Pasajero(Persona):
 	"""
@@ -47,10 +47,10 @@ class Pasajero(Persona):
 		self.id = cedula
 		self.nroVuelo = nroVuelo
 
-	def get_Edad(self):
+	def get_edad(self):
 		return self.edad
 
-	def get_Genero(self):
+	def get_genero(self):
 		return self.genero
 
 	def setEdad(self,e):
@@ -59,10 +59,10 @@ class Pasajero(Persona):
 	def setGenero(self,g):
 		self.genero = g
 
-	def get_Id(self):
+	def get_id(self):
 		return self.id
-	def get_NroVuelo(self):
+	def get_nroVuelo(self):
 		return self.nroVuelo
 
 	def verPasajero(self):
-		return [self.get_Id(),self.get_Nombre(),self.get_Edad(),self.get_Genero(),self.get_NroVuelo()]
+		return [self.get_id(),self.get_nombre(),self.get_edad(),self.get_genero(),self.get_nroVuelo()]
