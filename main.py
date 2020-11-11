@@ -48,7 +48,7 @@ def index():
 		pasajeros = vuelo.get_pasajeros()
 
 		for pasajero in pasajeros:
-			db.crearPasajero(pasajero.verPasajero())
+			db.crear_pasajero(pasajero.verPasajero())
 
 			numero_vuelo = vuelo.get_numero_vuelo()
 			ciudad_a = vuelo.get_ciudad_salida()
@@ -58,9 +58,9 @@ def index():
 			id_pasajero = pasajero.get_id()
 			vuelotmp = (numero_vuelo,ciudad_a,ciudad_b,numero_puestos,id_piloto,id_pasajero)
 
-			db.insertarVuelo(vuelotmp)
+			db.insertar_vuelo(vuelotmp)
 
-		db.crearPiloto(piloto)
+		db.crear_piloto(piloto)
 
 		infoVuelo.clear()
 		infoPasajeros.clear()
@@ -182,7 +182,7 @@ def login():
 	form = lg.LoginForm()
 
 	if form.validate_on_submit():
-		db.insertarAdmin(('juanhu2203@gmail.com','Pruebas2020'))
+		db.insertar_admin(('juanhu2203@gmail.com','Pruebas2020'))
 		real = db.query("SELECT * FROM ADMIN")
 		user = form.email.data
 		password = form.password.data

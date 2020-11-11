@@ -9,13 +9,7 @@ def create_connection(db_file):
     :param db_file: database file
     :return: Connection object or None
     """
-    conn = None
-    try:
-        conn = sqlite3.connect(db_file)
-        return conn
-    except Error as e:
-        print(e)
-
+    conn = sqlite3.connect(db_file)
     return conn
             
 def create_table(conn, create_table_sql):
@@ -31,7 +25,7 @@ def create_table(conn, create_table_sql):
         print(e)
 
 
-def createDB():
+def create_data_base():
 
     tabla_piloto = """ CREATE TABLE IF NOT EXISTS PILOTO (
                                         idPiloto integer,
@@ -85,7 +79,7 @@ def createDB():
     else:
         print("Error! cannot create the database connection.")
 
-def crearPasajero(pasajero):
+def crear_pasajero(pasajero):
     conn = create_connection(database)
     sql = ''' INSERT INTO PASAJERO (cedulaPasajero,nombre,edad,genero,nroVuelo)
               VALUES(?,?,?,?,?) '''
@@ -96,7 +90,7 @@ def crearPasajero(pasajero):
 
     return cur.lastrowid
 
-def crearPiloto(piloto):
+def crear_piloto(piloto):
     conn = create_connection(database)
     sql = ''' INSERT INTO PILOTO (idPiloto,nombre,horasVuelo)
               VALUES(?,?,?) '''
@@ -107,7 +101,7 @@ def crearPiloto(piloto):
 
     return cur.lastrowid
 
-def insertarVuelo(vuelo):
+def insertar_vuelo(vuelo):
     conn = create_connection(database)
     sql = ''' INSERT INTO VUELO (numeroVuelo,ciudadSalida,ciudadLlegada,numeroPuestos,idPiloto,idPasajero)
               VALUES(?,?,?,?,?,?) '''
@@ -118,7 +112,7 @@ def insertarVuelo(vuelo):
 
     return cur.lastrowid
 
-def insertarAdmin(admin):
+def insertar_admin(admin):
     conn = create_connection(database)
     sql = ''' INSERT INTO ADMIN (correo,clave)
               VALUES(?,?) '''
@@ -147,4 +141,4 @@ def query(sql):
 
     return rows
 
-createDB()
+create_data_base()
