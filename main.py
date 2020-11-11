@@ -44,19 +44,19 @@ def index():
 
 			pasajero = p.Pasajero(cedula,nombrePasajero,edad,sexo,nroVuelo)
 			vuelo.agregarPasajero(pasajero)
-			piloto = vuelo.getPiloto()
+			piloto = vuelo.get_Piloto()
 
-		pasajeros = vuelo.getPasajeros()
+		pasajeros = vuelo.get_Pasajeros()
 
 		for pasajero in pasajeros:
 			db.crearPasajero(pasajero.verPasajero())
 
-			numeroVuelo = vuelo.getNroVuelo()
-			ciudadA = vuelo.getCiudadSalida()
-			ciudadB = vuelo.getCiudadLlegada()
-			nroPuestos = vuelo.getNumeroPuestos()
+			numeroVuelo = vuelo.get_NroVuelo()
+			ciudadA = vuelo.get_CiudadSalida()
+			ciudadB = vuelo.get_CiudadLlegada()
+			nroPuestos = vuelo.get_NumeroPuestos()
 			idPiloto = piloto[0]
-			idPasajero = pasajero.getId()
+			idPasajero = pasajero.get_Id()
 			vuelotmp = (numeroVuelo,ciudadA,ciudadB,nroPuestos,idPiloto,idPasajero)
 
 			db.insertarVuelo(vuelotmp)
