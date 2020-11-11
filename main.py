@@ -19,7 +19,6 @@ app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b
 csrf = CSRFProtect()
 csrf.init_app(app) # Compliant
 
-db.createDB()
 
 
 @app.route("/index")
@@ -43,7 +42,7 @@ def index():
 			sexo = int(pasajero[3])
 
 			pasajero = p.Pasajero(cedula,nombrePasajero,edad,sexo,nroVuelo)
-			vuelo.agregarPasajero(pasajero)
+			vuelo.agregar_pasajero(pasajero)
 			piloto = vuelo.get_piloto()
 
 		pasajeros = vuelo.get_pasajeros()
@@ -51,10 +50,10 @@ def index():
 		for pasajero in pasajeros:
 			db.crearPasajero(pasajero.verPasajero())
 
-			numeroVuelo = vuelo.get_nroVuelo()
-			ciudadA = vuelo.get_ciudadSalida()
-			ciudadB = vuelo.get_ciudadLlegada()
-			nroPuestos = vuelo.get_numeroPuestos()
+			numeroVuelo = vuelo.get_numero_vuelo()
+			ciudadA = vuelo.get_ciudad_salida()
+			ciudadB = vuelo.get_ciudad_llegada()
+			nroPuestos = vuelo.get_numero_puestos()
 			idPiloto = piloto[0]
 			idPasajero = pasajero.get_id()
 			vuelotmp = (numeroVuelo,ciudadA,ciudadB,nroPuestos,idPiloto,idPasajero)

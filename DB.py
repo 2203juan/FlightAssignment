@@ -147,4 +147,4 @@ def query(sql):
 
     return rows
 
-
+createDB()

@@ -2,48 +2,34 @@ import persona as p
 
 class Vuelo(object):
 
-	def __init__(self, nroVuelo, ciudadSalida, ciudadLlegada, piloto, numeroPuestos):
-		self.ciudadSalida = ciudadSalida
-		self.ciudadLlegada = ciudadLlegada
+	def __init__(self, numero_vuelo, ciudad_salida, ciudad_llegada, piloto, numero_puestos):
+		self.ciudad_salida = ciudad_salida
+		self.ciudad_llegada = ciudad_llegada
 		self.piloto = piloto
-		self.numeroPuestos = numeroPuestos
+		self.numero_puestos = numero_puestos
 		self.pasajeros = list()
-		self.nroVuelo = nroVuelo
+		self.numero_vuelo = numero_vuelo
 
-	def get_ciudadSalida(self):
-		return self.ciudadSalida
+	def get_ciudad_salida(self):
+		return self.ciudad_salida
 
-	def get_ciudadLlegada(self):
-		return self.ciudadLlegada
+	def get_ciudad_llegada(self):
+		return self.ciudad_llegada
 
-	def get_numeroPuestos(self):
-		return self.numeroPuestos
+	def get_numero_puestos(self):
+		return self.numero_puestos
 
 	def get_piloto(self):
 		return self.piloto.verPiloto()
 
-	def agregarPasajero(self, p):
+	def agregar_pasajero(self, p):
 		self.pasajeros.append(p)
 
 	def get_pasajeros(self):
 		return self.pasajeros
 
-	def get_nroVuelo(self):
-		return self.nroVuelo
+	def get_numero_vuelo(self):
+		return self.numero_vuelo
 
-	def verVuelo(self):
-		return [self.get_nroVuelo(),self.get_ciudadSalida(), self.get_ciudadLlegada(), self.get_numeroPuestos(), self.get_piloto(), self.get_pasajeros()]
-
-"""
-def main():
-	pil1 = p.Piloto("Juan Hoyos",472)
-	v1 = Vuelo("Cali","Medellin",pil1,350)
-
-	pa1 = p.Pasajero("Jeison",22,0)
-	pa2 = p.Pasajero("Julian",27,0)
-
-	v1.agregarPasajero(pa1)
-	v1.agregarPasajero(pa2)
-	print(v1.verVuelo())
-main()
-"""
+	def ver_vuelo(self):
+		return [self.get_numero_vuelo(),self.get_ciudad_salida(), self.get_ciudad_llegada(), self.get_numero_puestos(), self.get_piloto(), self.get_pasajeros()]
