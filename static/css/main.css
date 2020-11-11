@@ -46,7 +46,7 @@ table, th, td {
     border: 2px solid #006DAC;
     border-collapse: collapse;
     padding: 3px;
-    font-family:Verdana;
+    font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif;
     font-size:20px;
     text-align: center;
 }
