@@ -10,7 +10,7 @@ def numero_puestos_check(form,field):
 
 		if number < 200 or number > 480:
 			raise ValidationError('It should be a number between 200 and 480!!')
-	except Exception as e:
+	except Exception:
 		raise ValidationError('It should be a number between 200 and 480!!')
 
 def numero_vuelo_check(form,field):
@@ -19,7 +19,7 @@ def numero_vuelo_check(form,field):
 
 		if number < 10000 or number > 99999:
 			raise ValidationError('It should be a number between 10000 and 99999!!')
-	except Exception as e:
+	except Exception:
 		raise ValidationError('It should be a number between 10000 and 99999!!')
 
 def cedula_check(form,field):
@@ -28,7 +28,7 @@ def cedula_check(form,field):
 
 		if number < 1000000000 or number > 9999999999:
 			raise ValidationError('It should be a number between 10000 and 99999!!')
-	except Exception as e:
+	except Exception:
 		raise ValidationError('It should be a number between 1000000000 and 9999999999!!')
 
 def edad_check(form,field):
@@ -37,7 +37,7 @@ def edad_check(form,field):
 
 		if number < 0 or number > 150:
 			raise ValidationError('It should be a number between 10000 and 99999!!')
-	except Exception as e:
+	except Exception:
 		raise ValidationError('It should be a number between 0 and 150!!')
 
 class FlyForm(FlaskForm):
