@@ -94,7 +94,7 @@ def pasajeros():
 	return render_template("pasajeros.html")
 
 @app.route("/registrarPasajero",methods=["GET", "POST"])
-def registrarPasajero():
+def registrar_pasajero():
 	form = forms.PasForm()
 	if form.validate_on_submit():
 		cedula = form.cedula.data
@@ -132,7 +132,7 @@ def consultar_por_numero():
 			'Ciudad de llegada': list(),
 			'Numero de puestos': list(),
 			'ID piloto': list(),
-			'ID pasajero':list()
+			'ID pasajero': list()
 
 		}
 
