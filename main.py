@@ -125,9 +125,9 @@ def consultar_por_numero():
 	if form.validate_on_submit():
 		numero_vuelo = form.numero_vuelo.data
 		query = db.query("SELECT * FROM VUELO WHERE numeroVuelo = {}".format(numero_vuelo))
-		
+		key_numero_vuelo = 'Numero de vuelo'
 		items = {
-			'Numero de vuelo': list(),
+			key_numero_vuelo: list(),
 			'Ciudad de salida': list(),
 			'Ciudad de llegada': list(),
 			'Numero de puestos': list(),
@@ -137,8 +137,8 @@ def consultar_por_numero():
 		}
 
 		for row in query:
-			if row[0] not in items['Numero de vuelo']:
-				items['Numero de vuelo'].append(row[0])
+			if row[0] not in items[key_numero_vuelo]:
+				items[key_numero_vuelo].append(row[0])
 				items['Ciudad de salida'].append(row[1])
 				items['Ciudad de llegada'].append(row[2])
 				items['Numero de puestos'].append(row[3])
@@ -196,7 +196,7 @@ def about():
 
 @app.route('/reserva',methods = ['GET', 'POST'])
 def reserva():
-	form = forms.buyForm()
+	form = forms.BuyForm()
 	if form.validate_on_submit():
 
 		ciudades = {"1":'Medellin', "2":'Bogota',"3":'Cali',"4":'San Andrés',"5":'Cartagena'}
@@ -244,7 +244,7 @@ def reserva():
 
 @app.route('/reserva_equipaje',methods = ['GET', 'POST'])
 def reserva_equipaje():
-	form = forms.luggageForm()
+	form = forms.LuggageForm()
 	if form.validate_on_submit():
 
 		cedula = form.cedula.data
