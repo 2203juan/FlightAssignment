@@ -122,10 +122,7 @@ def insertar_admin(admin):
     conn.commit()
 
     return cur.lastrowid
-#createDB()
 
-#crearPasajero((123,"Juan",20,0,1234456))
-#crearPasajero((123,"Juan",20,0,4444))
 
 def query(sql):
     conn = create_connection(database)
