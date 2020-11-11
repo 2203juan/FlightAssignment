@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, Length,NumberRange,ValidationError
 
 
 
-def nroPuestoscheck(form,field):
+def numero_puestos_check(form,field):
 	try:
 		number = field.data
 
@@ -13,7 +13,7 @@ def nroPuestoscheck(form,field):
 	except Exception as e:
 		raise ValidationError('It should be a number between 200 and 480!!')
 
-def nroVueloCheck(form,field):
+def numero_vuelo_check(form,field):
 	try:
 		number = field.data
 
@@ -22,7 +22,7 @@ def nroVueloCheck(form,field):
 	except Exception as e:
 		raise ValidationError('It should be a number between 10000 and 99999!!')
 
-def cedulaCheck(form,field):
+def cedula_check(form,field):
 	try:
 		number = field.data
 
@@ -31,7 +31,7 @@ def cedulaCheck(form,field):
 	except Exception as e:
 		raise ValidationError('It should be a number between 1000000000 and 9999999999!!')
 
-def edadCheck(form,field):
+def edad_check(form,field):
 	try:
 		number = field.data
 
@@ -41,40 +41,40 @@ def edadCheck(form,field):
 		raise ValidationError('It should be a number between 0 and 150!!')
 
 class FlyForm(FlaskForm):
-    ciudadA = StringField('Ciudad de Salida:', validators = [DataRequired(), Length(max=64)])
-    ciudadB = StringField('Ciudad de Llegada:', validators = [DataRequired(), Length(max=64)])
-    nroPuestos = IntegerField('Numero de puestos:', validators = [nroPuestoscheck] )
-    nroVuelo = IntegerField('Numero de vuelo:', validators = [nroVueloCheck] )
-    nombrePiloto = StringField('Nombre del piloto:', validators = [DataRequired(), Length(max=64)])
-    horasVueloPiloto = IntegerField('Horas de vuelo del piloto:', validators = [nroVueloCheck] )
-    idPiloto = IntegerField('ID del piloto:', validators = [nroVueloCheck] )
+    ciudad_a = StringField('Ciudad de Salida:', validators = [DataRequired(), Length(max=64)])
+    ciudad_b = StringField('Ciudad de Llegada:', validators = [DataRequired(), Length(max=64)])
+    numero_puestos = IntegerField('Numero de puestos:', validators = [numero_puestos_check] )
+    numero_vuelo = IntegerField('Numero de vuelo:', validators = [numero_vuelo_check] )
+    nombre_piloto = StringField('Nombre del piloto:', validators = [DataRequired(), Length(max=64)])
+    horas_vuelo_piloto = IntegerField('Horas de vuelo del piloto:', validators = [numero_vuelo_check] )
+    id_piloto = IntegerField('ID del piloto:', validators = [numero_vuelo_check] )
     submit = SubmitField('Continuar')
 
 class PasForm(FlaskForm):
-	cedula = IntegerField('Cedula:', validators = [cedulaCheck] )
-	nombrePasajero = StringField('Nombre del pasajero:', validators = [DataRequired(), Length(max=64)])
-	edad = IntegerField('Edad:', validators = [edadCheck] )
+	cedula = IntegerField('Cedula:', validators = [cedula_check] )
+	nombre_pasajero = StringField('Nombre del pasajero:', validators = [DataRequired(), Length(max=64)])
+	edad = IntegerField('Edad:', validators = [edad_check] )
 	sexo = RadioField('Sexo:', choices = [(0,'hombre'),(1,'mujer')],validators = [DataRequired()])
 	submit = SubmitField('Continuar')
 
 class numeroVueloForm(FlaskForm):
-	nroVuelo = IntegerField('Numero de vuelo:', validators = [nroVueloCheck] )
+	numero_vuelo = IntegerField('Numero de vuelo:', validators = [numero_vuelo_check] )
 	submit = SubmitField('Consultar')
 
-class idPilotoForm(FlaskForm):
-	idPiloto = IntegerField('Id piloto:', validators = [nroVueloCheck] )
+class PilotoForm(FlaskForm):
+	id_piloto = IntegerField('Id piloto:', validators = [numero_vuelo_check] )
 	submit = SubmitField('Consultar')
 
 class buyForm(FlaskForm):
 	nombre = StringField('Nombre :', validators = [DataRequired(), Length(max=64)])
-	cedula = IntegerField('Cedula:', validators = [cedulaCheck] )
-	edad = IntegerField('Edad:', validators = [edadCheck] )
-	ciudadA = SelectField(u'Ciudad de Salida', choices=[(1, 'Medellin'), (2, 'Bogota'), (3, 'Cali'), (4, 'San Andrés'), (5, 'Cartagena')])
-	ciudadB = SelectField(u'Ciudad de Llegada', choices=[(1, 'Medellin'), (2, 'Bogota'), (3, 'Cali'), (4, 'San Andrés'), (5, 'Cartagena')])
-	cantidadPersonas = IntegerField('Cantidad de personas:', validators = [edadCheck] )
+	cedula = IntegerField('Cedula:', validators = [cedula_check] )
+	edad = IntegerField('Edad:', validators = [edad_check] )
+	ciudad_a = SelectField(u'Ciudad de Salida', choices=[(1, 'Medellin'), (2, 'Bogota'), (3, 'Cali'), (4, 'San Andrés'), (5, 'Cartagena')])
+	ciudad_b = SelectField(u'Ciudad de Llegada', choices=[(1, 'Medellin'), (2, 'Bogota'), (3, 'Cali'), (4, 'San Andrés'), (5, 'Cartagena')])
+	cantidad_personas = IntegerField('Cantidad de personas:', validators = [edad_check] )
 	submit = SubmitField('Reservar')
 
 class luggageForm(FlaskForm):
-	cedula = IntegerField('Cedula:', validators = [cedulaCheck] )
-	peso = IntegerField('Peso (Kg) del equipaje:', validators = [edadCheck] )
+	cedula = IntegerField('Cedula:', validators = [cedula_check] )
+	peso = IntegerField('Peso (Kg) del equipaje:', validators = [edad_check] )
 	submit = SubmitField('Reservar')

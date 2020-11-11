@@ -24,16 +24,16 @@ csrf.init_app(app) # Compliant
 @app.route("/index")
 def index():
 	if len(infoVuelo) and len(infoPasajeros):
-		ciudadA =  infoVuelo[0]
-		ciudadB = infoVuelo[1]
-		nroPuestos = infoVuelo[2]
-		nroVuelo = infoVuelo[3] 
-		nombrePiloto = infoVuelo[4] 
-		horasVueloPiloto = infoVuelo[5]
-		idPiloto = infoVuelo[6]
+		ciudad_a =  infoVuelo[0]
+		ciudad_b = infoVuelo[1]
+		numero_puestos = infoVuelo[2]
+		numero_vuelo = infoVuelo[3] 
+		nombre_piloto = infoVuelo[4] 
+		horas_vuelo_piloto = infoVuelo[5]
+		id_piloto = infoVuelo[6]
 
-		piloto = p.Piloto(idPiloto,nombrePiloto, horasVueloPiloto)
-		vuelo = v.Vuelo(nroVuelo,ciudadA,ciudadB,piloto,nroPuestos)
+		piloto = p.Piloto(id_piloto,nombre_piloto, horas_vuelo_piloto)
+		vuelo = v.Vuelo(numero_vuelo,ciudad_a,ciudad_b,piloto,numero_puestos)
 
 		for pasajero in infoPasajeros:
 			cedula = pasajero[0]
@@ -41,7 +41,7 @@ def index():
 			edad = pasajero[2]
 			sexo = int(pasajero[3])
 
-			pasajero = p.Pasajero(cedula,nombrePasajero,edad,sexo,nroVuelo)
+			pasajero = p.Pasajero(cedula,nombrePasajero,edad,sexo,numero_vuelo)
 			vuelo.agregar_pasajero(pasajero)
 			piloto = vuelo.get_piloto()
 
@@ -51,12 +51,12 @@ def index():
 			db.crearPasajero(pasajero.verPasajero())
 
 			numeroVuelo = vuelo.get_numero_vuelo()
-			ciudadA = vuelo.get_ciudad_salida()
-			ciudadB = vuelo.get_ciudad_llegada()
-			nroPuestos = vuelo.get_numero_puestos()
-			idPiloto = piloto[0]
+			ciudad_a = vuelo.get_ciudad_salida()
+			ciudad_b = vuelo.get_ciudad_llegada()
+			numero_puestos = vuelo.get_numero_puestos()
+			id_piloto = piloto[0]
 			idPasajero = pasajero.get_id()
-			vuelotmp = (numeroVuelo,ciudadA,ciudadB,nroPuestos,idPiloto,idPasajero)
+			vuelotmp = (numeroVuelo,ciudad_a,ciudad_b,numero_puestos,id_piloto,idPasajero)
 
 			db.insertarVuelo(vuelotmp)
 
@@ -70,21 +70,21 @@ def index():
 def vuelo():
 	form = forms.FlyForm()
 	if form.validate_on_submit():
-		ciudadA = form.ciudadA.data
-		ciudadB = form.ciudadB.data
-		nroPuestos = form.nroPuestos.data
-		nroVuelo = form.nroVuelo.data
-		nombrePiloto = form.nombrePiloto.data
-		horasVueloPiloto = form.horasVueloPiloto.data
-		idPiloto = form.idPiloto.data
+		ciudad_a = form.ciudad_a.data
+		ciudad_b = form.ciudad_b.data
+		numero_puestos = form.numero_puestos.data
+		numero_vuelo = form.numero_vuelo.data
+		nombre_piloto = form.nombre_piloto.data
+		horas_vuelo_piloto = form.horas_vuelo_piloto.data
+		id_piloto = form.id_piloto.data
 
-		infoVuelo.append(ciudadA)
-		infoVuelo.append(ciudadB)
-		infoVuelo.append(nroPuestos)
-		infoVuelo.append(nroVuelo)
-		infoVuelo.append(nombrePiloto)
-		infoVuelo.append(horasVueloPiloto)
-		infoVuelo.append(idPiloto)
+		infoVuelo.append(ciudad_a)
+		infoVuelo.append(ciudad_b)
+		infoVuelo.append(numero_puestos)
+		infoVuelo.append(numero_vuelo)
+		infoVuelo.append(nombre_piloto)
+		infoVuelo.append(horas_vuelo_piloto)
+		infoVuelo.append(id_piloto)
 
 		return redirect(url_for('pasajeros'))
 
@@ -98,13 +98,13 @@ def registrarPasajero():
 	form = forms.PasForm()
 	if form.validate_on_submit():
 		cedula = form.cedula.data
-		nombrePasajero = form.nombrePasajero.data
+		nombre_pasajero = form.nombre_pasajero.data
 		edad = form.edad.data
 		sexo = form.sexo.data
 
 		tmp = list()
 		tmp.append(cedula)
-		tmp.append(nombrePasajero)
+		tmp.append(nombre_pasajero)
 		tmp.append(edad)
 		tmp.append(sexo)
 		infoPasajeros.append(tmp)
@@ -123,8 +123,8 @@ def consultarVuelo():
 def consultarPorNumero():
 	form = forms.numeroVueloForm()
 	if form.validate_on_submit():
-		nroVuelo = form.nroVuelo.data
-		query = db.query("SELECT * FROM VUELO WHERE numeroVuelo = {}".format(nroVuelo))
+		numero_vuelo = form.numero_vuelo.data
+		query = db.query("SELECT * FROM VUELO WHERE numeroVuelo = {}".format(numero_vuelo))
 		
 		items = {
 			'Numero de vuelo': list(),
@@ -156,10 +156,10 @@ def consultarPorNumero():
 
 @app.route("/consultarPorPiloto", methods=["GET", "POST"])
 def consultarPorPiloto():
-	form = forms.idPilotoForm()
+	form = forms.PilotoForm()
 	if form.validate_on_submit():
-		idPiloto = form.idPiloto.data
-		query = db.query("SELECT numeroVuelo,ciudadSalida,ciudadLlegada FROM VUELO WHERE idPiloto = {}".format(idPiloto))
+		id_piloto = form.id_piloto.data
+		query = db.query("SELECT numeroVuelo,ciudadSalida,ciudadLlegada FROM VUELO WHERE idPiloto = {}".format(id_piloto))
 		
 		items = {}
 
@@ -203,15 +203,15 @@ def reserva():
 		nombre = form.nombre.data
 		cedula = form.cedula.data
 		edad = form.edad.data
-		ciudadA = form.ciudadA.data
-		ciudadB = form.ciudadB.data
+		ciudad_a = form.ciudad_a.data
+		ciudad_b = form.ciudad_b.data
 		cantidadPersonas = form.cantidadPersonas.data
 
 		monto_base = 300000
 		descuento = 0 
 
 
-		if ciudadA == "1" or ciudadA == "2" or ciudadA == "3":
+		if ciudad_a == "1" or ciudad_a == "2" or ciudad_a == "3":
 			descuento += 0.2# si la ciudad de salida es Medellin,Bogota o Cali se descuenta un 20%
 
 		if  1<= edad <= 5:
@@ -235,7 +235,7 @@ def reserva():
 
 
 
-		items = {"Nombre": nombre,"Cedula": cedula, "Edad": edad,"Ciudad de Salida":ciudades[ciudadA],"Ciudad de Llegada":ciudades[ciudadB],"Nro Personas": cantidadPersonas,"Monto Reserva": montoTotal}
+		items = {"Nombre": nombre,"Cedula": cedula, "Edad": edad,"Ciudad de Salida":ciudades[ciudad_a],"Ciudad de Llegada":ciudades[ciudad_b],"Nro Personas": cantidadPersonas,"Monto Reserva": montoTotal}
 
 		print(items)
 		return render_template("confirmacion.html", result = items)
