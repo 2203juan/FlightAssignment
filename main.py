@@ -256,7 +256,7 @@ def reserva_equipaje():
 		# entre 1 y 23 kg vale 60.000
 
 		# por cada kg adicional se cobran 3000 pesos
-		if 23 < peso <= 50:
+		if 23 <= peso <= 50:
 			excedente = (peso - 23)*3000
 
 		# por cada kg adicional se cobran 5000 pesos
