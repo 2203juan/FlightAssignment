@@ -37,11 +37,11 @@ def index():
 
 		for pasajero in infoPasajeros:
 			cedula = pasajero[0]
-			nombrePasajero = pasajero[1]
+			nombre_pasajero = pasajero[1]
 			edad = pasajero[2]
 			sexo = int(pasajero[3])
 
-			pasajero = p.Pasajero(cedula,nombrePasajero,edad,sexo,numero_vuelo)
+			pasajero = p.Pasajero(cedula,nombre_pasajero,edad,sexo,numero_vuelo)
 			vuelo.agregar_pasajero(pasajero)
 			piloto = vuelo.get_piloto()
 
@@ -50,13 +50,13 @@ def index():
 		for pasajero in pasajeros:
 			db.crearPasajero(pasajero.verPasajero())
 
-			numeroVuelo = vuelo.get_numero_vuelo()
+			numero_vuelo = vuelo.get_numero_vuelo()
 			ciudad_a = vuelo.get_ciudad_salida()
 			ciudad_b = vuelo.get_ciudad_llegada()
 			numero_puestos = vuelo.get_numero_puestos()
 			id_piloto = piloto[0]
-			idPasajero = pasajero.get_id()
-			vuelotmp = (numeroVuelo,ciudad_a,ciudad_b,numero_puestos,id_piloto,idPasajero)
+			id_pasajero = pasajero.get_id()
+			vuelotmp = (numero_vuelo,ciudad_a,ciudad_b,numero_puestos,id_piloto,id_pasajero)
 
 			db.insertarVuelo(vuelotmp)
 
@@ -116,11 +116,11 @@ def registrarPasajero():
 
 
 @app.route("/consultarVuelo")
-def consultarVuelo():
+def consultar_vuelo():
 	return render_template("consultarVuelo.html")
 
 @app.route("/consultarPorNumero", methods=["GET", "POST"])
-def consultarPorNumero():
+def consultar_por_numero():
 	form = forms.numeroVueloForm()
 	if form.validate_on_submit():
 		numero_vuelo = form.numero_vuelo.data
@@ -155,7 +155,7 @@ def consultarPorNumero():
 	return render_template("consultarPorNumero.html",form = form)
 
 @app.route("/consultarPorPiloto", methods=["GET", "POST"])
-def consultarPorPiloto():
+def consultar_por_piloto():
 	form = forms.PilotoForm()
 	if form.validate_on_submit():
 		id_piloto = form.id_piloto.data
@@ -205,7 +205,7 @@ def reserva():
 		edad = form.edad.data
 		ciudad_a = form.ciudad_a.data
 		ciudad_b = form.ciudad_b.data
-		cantidadPersonas = form.cantidadPersonas.data
+		cantidad_personas = form.cantidad_personas.data
 
 		monto_base = 300000
 		descuento = 0 
@@ -226,16 +226,16 @@ def reserva():
 
 		monto_por_persona = monto_base*(1-descuento)
 
-		if cantidadPersonas > 3:
+		if cantidad_personas > 3:
 			monto_por_persona = monto_por_persona*(1-0.1)
 
-		montoTotal = cantidadPersonas*monto_por_persona
+		monto_total = cantidad_personas*monto_por_persona
 
-		montoTotal  = "${:,.2f}".format(montoTotal)
+		monto_total  = "${:,.2f}".format(monto_total)
 
 
 
-		items = {"Nombre": nombre,"Cedula": cedula, "Edad": edad,"Ciudad de Salida":ciudades[ciudad_a],"Ciudad de Llegada":ciudades[ciudad_b],"Nro Personas": cantidadPersonas,"Monto Reserva": montoTotal}
+		items = {"Nombre": nombre,"Cedula": cedula, "Edad": edad,"Ciudad de Salida":ciudades[ciudad_a],"Ciudad de Llegada":ciudades[ciudad_b],"Nro Personas": cantidad_personas,"Monto Reserva": monto_total}
 
 		print(items)
 		return render_template("confirmacion.html", result = items)
@@ -270,13 +270,13 @@ def reserva_equipaje():
 
 
 
-		montoTotal = monto_base + excedente
+		monto_total = monto_base + excedente
 
-		montoTotal  = "${:,.2f}".format(montoTotal)
+		monto_total  = "${:,.2f}".format(monto_total)
 
 
 
-		items = {"Cedula": cedula, "Monto Reserva Equipaje": montoTotal}
+		items = {"Cedula": cedula, "Monto Reserva Equipaje": monto_total}
 
 		print(items)
 		return render_template("confirmacion_equipaje.html", result = items)
