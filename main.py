@@ -121,7 +121,7 @@ def consultar_vuelo():
 
 @app.route("/consultarPorNumero", methods=["GET", "POST"])
 def consultar_por_numero():
-	form = forms.numeroVueloForm()
+	form = forms.NumeroVueloForm()
 	if form.validate_on_submit():
 		numero_vuelo = form.numero_vuelo.data
 		query = db.query("SELECT * FROM VUELO WHERE numeroVuelo = {}".format(numero_vuelo))

@@ -1,8 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, RadioField, SelectField
 from wtforms.validators import DataRequired, Length,NumberRange,ValidationError
-error_no_vacio = "Este campo es obligatorio"
 
+#constantes
+error_no_vacio = "Este campo es obligatorio"
+cedula = 'Cedula:'
 
 def numero_puestos_check(form,field):
 	error_numero_puestos = 'El numero de puestos debe estar entre 200 y 480!!'
@@ -95,13 +97,13 @@ class FlyForm(FlaskForm):
     submit = SubmitField('Continuar')
 
 class PasForm(FlaskForm):
-	cedula = IntegerField('Cedula:', validators = [cedula_check] )
+	cedula = IntegerField(cedula, validators = [cedula_check] )
 	nombre_pasajero = StringField('Nombre del pasajero:', validators = [DataRequired(message = error_no_vacio), Length(max=64)])
 	edad = IntegerField('Edad:', validators = [edad_check] )
 	sexo = RadioField('Sexo:', choices = [(0,'hombre'),(1,'mujer')],validators = [DataRequired(message = error_no_vacio)])
 	submit = SubmitField('Continuar')
 
-class numeroVueloForm(FlaskForm):
+class NumeroVueloForm(FlaskForm):
 	numero_vuelo = IntegerField('Numero de vuelo:', validators = [numero_vuelo_check] )
 	submit = SubmitField('Consultar')
 
@@ -109,16 +111,16 @@ class PilotoForm(FlaskForm):
 	id_piloto = IntegerField('Id piloto:', validators = [id_piloto_check])
 	submit = SubmitField('Consultar')
 
-class buyForm(FlaskForm):
+class BuyForm(FlaskForm):
 	nombre = StringField('Nombre :', validators = [DataRequired(message = error_no_vacio), Length(max=64)])
-	cedula = IntegerField('Cedula:', validators = [cedula_check] )
+	cedula = IntegerField(cedula, validators = [cedula_check] )
 	edad = IntegerField('Edad:', validators = [edad_check] )
 	ciudad_a = SelectField(u'Ciudad de Salida', choices=[(1, 'Medellin'), (2, 'Bogota'), (3, 'Cali'), (4, 'San Andrés'), (5, 'Cartagena')])
 	ciudad_b = SelectField(u'Ciudad de Llegada', choices=[(1, 'Medellin'), (2, 'Bogota'), (3, 'Cali'), (4, 'San Andrés'), (5, 'Cartagena')])
 	cantidad_personas = IntegerField('Cantidad de personas:', validators = [cantidad_personas_check] )
 	submit = SubmitField('Reservar')
 
-class luggageForm(FlaskForm):
-	cedula = IntegerField('Cedula:', validators = [cedula_check] )
+class LuggageForm(FlaskForm):
+	cedula = IntegerField(cedula, validators = [cedula_check] )
 	peso = IntegerField('Peso (Kg) del equipaje:', validators = [peso_check] )
 	submit = SubmitField('Reservar')
