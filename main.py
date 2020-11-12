@@ -1,14 +1,17 @@
+# se importan todos los modulos de flask
 from flask import Flask
 from flask import render_template
 from flask import request
 from flask import  url_for
 from flask import redirect
-import forms
+from flask_wtf.csrf import CSRFProtect
+# se importan los modulos desarrollados
 import vuelo as v
 import persona as p
 import DB as db
+import forms
 import login as lg
-from flask_wtf.csrf import CSRFProtect
+import costosreserva as reserva
 
 
 infoVuelo = list()
@@ -195,7 +198,7 @@ def about():
 	return render_template('sobre_nosotros.html')
 
 @app.route('/reserva',methods = ['GET', 'POST'])
-def reserva():
+def reserva_vuelo():
 	form = forms.BuyForm()
 	if form.validate_on_submit():
 
@@ -207,37 +210,10 @@ def reserva():
 		ciudad_b = form.ciudad_b.data
 		cantidad_personas = form.cantidad_personas.data
 
-		monto_base = 300000
-		descuento = 0 
-
-
-		if ciudad_a == "1" or ciudad_a == "2" or ciudad_a == "3":
-			descuento += 0.2# si la ciudad de salida es Medellin,Bogota o Cali se descuenta un 20%
-
-		if  1<= edad <= 5:
-			descuento += 0.6
-
-		if 5 < edad <= 10:
-			descuento += 0.3
-		
-		if  10 < edad	<= 18:
-			descuento += 0.2
-
-
-		monto_por_persona = monto_base*(1-descuento)
-
-		if cantidad_personas > 3:
-			monto_por_persona = monto_por_persona*(1-0.1)
-
-		monto_total = cantidad_personas*monto_por_persona
-
-		monto_total  = "${:,.2f}".format(monto_total)
-
-
+		monto_total = reserva.calcular_valor_reserva(ciudad_a, edad, cantidad_personas)
 
 		items = {"Nombre": nombre,"Cedula": cedula, "Edad": edad,"Ciudad de Salida":ciudades[ciudad_a],"Ciudad de Llegada":ciudades[ciudad_b],"Nro Personas": cantidad_personas,"Monto Reserva": monto_total}
 
-		print(items)
 		return render_template("confirmacion.html", result = items)
 
 	return render_template("reserva.html", form = form)
@@ -250,35 +226,10 @@ def reserva_equipaje():
 		cedula = form.cedula.data
 		peso = form.peso.data
 
-		monto_base = 60000
-		excedente = 0
-
-		# entre 1 y 23 kg vale 60.000
-
-		# por cada kg adicional se cobran 3000 pesos
-		if 23 <= peso <= 50:
-			excedente = (peso - 23)*3000
-
-		# por cada kg adicional se cobran 5000 pesos
-		elif 50< peso <=70:
-			excedente = (peso-20)*5000
-
-		# por cada kg adicional se cobran 5000 pesos
-		else:
-			excedente = (peso -70)*7000
-
-
-
-
-		monto_total = monto_base + excedente
-
-		monto_total  = "${:,.2f}".format(monto_total)
-
-
+		monto_total = reserva.calcular_valor_reserva_equipaje(peso)
 
 		items = {"Cedula": cedula, "Monto Reserva Equipaje": monto_total}
 
-		print(items)
 		return render_template("confirmacion_equipaje.html", result = items)
 
 	return render_template("reserva_equipaje.html", form = form)
