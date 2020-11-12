@@ -180,7 +180,7 @@ def consultar_por_piloto():
 
 	return render_template("consultarPorPiloto.html",form = form)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
 	form = lg.LoginForm()
 
@@ -193,6 +193,15 @@ def login():
 			return redirect(url_for('index'))
 			
 	return render_template('login.html', form = form)
+
+@app.route('/cliente')
+def cliente():
+	return render_template('cliente.html')
+
+@app.route('/')
+def inicio():
+	return render_template('menu.html')
+
 @app.route('/about')
 def about():
 	return render_template('sobre_nosotros.html')
