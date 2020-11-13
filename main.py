@@ -219,9 +219,9 @@ def reserva_vuelo():
 		ciudad_b = form.ciudad_b.data
 		cantidad_personas = form.cantidad_personas.data
 
-		monto_total = reserva.calcular_valor_reserva(ciudad_a, edad, cantidad_personas)
+		monto_total, descuento = reserva.calcular_valor_reserva(ciudad_a, edad, cantidad_personas)
 
-		items = {"Nombre": nombre,"Cedula": cedula, "Edad": edad,"Ciudad de Salida":ciudades[ciudad_a],"Ciudad de Llegada":ciudades[ciudad_b],"Nro Personas": cantidad_personas,"Monto Reserva": monto_total}
+		items = {"Nombre": nombre,"Cedula": cedula, "Edad": edad,"Ciudad de Salida":ciudades[ciudad_a],"Ciudad de Llegada":ciudades[ciudad_b],"Nro Personas": cantidad_personas,"Monto Reserva": monto_total, "Descuento Aplicado": descuento}
 
 		return render_template("confirmacion.html", result = items)
 
@@ -235,15 +235,13 @@ def reserva_equipaje():
 		cedula = form.cedula.data
 		peso = form.peso.data
 
-		monto_total = reserva.calcular_valor_reserva_equipaje(peso)
+		monto_total, excedente = reserva.calcular_valor_reserva_equipaje(peso)
 
-		items = {"Cedula": cedula, "Monto Reserva Equipaje": monto_total}
+		items = {"Cedula": cedula, "Monto Reserva Equipaje": monto_total, "Excedente Aplicado": excedente}
 
 		return render_template("confirmacion_equipaje.html", result = items)
 
 	return render_template("reserva_equipaje.html", form = form)
 
-def main():
-	app.run(debug = True, port = 8080)
-
-main()
+if __name__ == "__main__":
+    app.run()
