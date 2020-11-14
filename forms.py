@@ -86,6 +86,18 @@ def peso_check(form,field):
 	except Exception:
 		raise ValidationError(error_peso)
 
+
+def sexo_check(form,field):
+	error_sexo = "El sexo debe der un numero entero entre 0 y 1 Sexo: (0 mujer - 1 hombre)"
+	try:
+		number = field.data
+
+		if number < 0 or number > 1:
+			raise ValidationError(error_sexo)
+	except Exception:
+		raise ValidationError(error_sexo)
+
+
 class FlyForm(FlaskForm):
     ciudad_a = StringField('Ciudad de Salida:', validators = [DataRequired(message = error_no_vacio), Length(max=64)])
     ciudad_b = StringField('Ciudad de Llegada:', validators = [DataRequired(message = error_no_vacio), Length(max=64)])
@@ -100,7 +112,7 @@ class PasForm(FlaskForm):
 	cedula = IntegerField(cedula, validators = [cedula_check] )
 	nombre_pasajero = StringField('Nombre del pasajero:', validators = [DataRequired(message = error_no_vacio), Length(max=64)])
 	edad = IntegerField('Edad:', validators = [edad_check] )
-	sexo = RadioField('Sexo:', choices = [(0,'hombre'),(1,'mujer')],validators = [DataRequired(message = error_no_vacio)])
+	sexo = IntegerField('Sexo: (0 mujer - 1 hombre)', validators = [sexo_check])
 	submit = SubmitField('Continuar')
 
 class NumeroVueloForm(FlaskForm):
@@ -115,8 +127,8 @@ class BuyForm(FlaskForm):
 	nombre = StringField('Nombre :', validators = [DataRequired(message = error_no_vacio), Length(max=64)])
 	cedula = IntegerField(cedula, validators = [cedula_check] )
 	edad = IntegerField('Edad:', validators = [edad_check] )
-	ciudad_a = SelectField(u'Ciudad de Salida', choices=[(1, 'Medellin'), (2, 'Bogota'), (3, 'Cali'), (4, 'San Andrés'), (5, 'Cartagena')])
-	ciudad_b = SelectField(u'Ciudad de Llegada', choices=[(1, 'Medellin'), (2, 'Bogota'), (3, 'Cali'), (4, 'San Andrés'), (5, 'Cartagena')])
+	ciudad_a = StringField(u'Ciudad de Salida',  validators = [DataRequired(message = error_no_vacio), Length(max=64)])
+	ciudad_b = StringField(u'Ciudad de Llegada',  validators = [DataRequired(message = error_no_vacio), Length(max=64)])
 	cantidad_personas = IntegerField('Cantidad de personas:', validators = [cantidad_personas_check] )
 	submit = SubmitField('Reservar')
 

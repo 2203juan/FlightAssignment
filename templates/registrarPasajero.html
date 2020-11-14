@@ -30,14 +30,8 @@
 		    </div>
 
 		    <div class="form-group">
-		    	{{ form.sexo.label }}<br>
-				{% for subfield in form.sexo %}
-				    <tr>
-				        <td>{{ subfield }}</td>
-				        <td>{{ subfield.label }}</td>
-				        
-				    </tr>
-				{% endfor %}
+	            {{ form.sexo.label }}
+	            {{ form.sexo(size=4) }}<br>
 	            {% for error in form.sexo.errors %}
 	            <span style="color: red;">{{ error }}</span>
 	            {% endfor %}

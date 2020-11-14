@@ -211,17 +211,17 @@ def reserva_vuelo():
 	form = forms.BuyForm()
 	if form.validate_on_submit():
 
-		ciudades = {"1":'Medellin', "2":'Bogota',"3":'Cali',"4":'San Andrés',"5":'Cartagena'}
+		
 		nombre = form.nombre.data
 		cedula = form.cedula.data
 		edad = form.edad.data
-		ciudad_a = form.ciudad_a.data
-		ciudad_b = form.ciudad_b.data
+		ciudad_a = form.ciudad_a.data.upper()
+		ciudad_b = form.ciudad_b.data.upper()
 		cantidad_personas = form.cantidad_personas.data
 
 		monto_total, descuento = reserva.calcular_valor_reserva(ciudad_a, edad, cantidad_personas)
 
-		items = {"Nombre": nombre,"Cedula": cedula, "Edad": edad,"Ciudad de Salida":ciudades[ciudad_a],"Ciudad de Llegada":ciudades[ciudad_b],"Nro Personas": cantidad_personas,"Monto Reserva": monto_total, "Descuento Aplicado": descuento}
+		items = {"Nombre": nombre,"Cedula": cedula, "Edad": edad,"Ciudad de Salida":ciudad_a,"Ciudad de Llegada":ciudad_b,"Nro Personas": cantidad_personas,"Monto Reserva": monto_total, "Descuento Aplicado": descuento}
 
 		return render_template("confirmacion.html", result = items)
 
@@ -244,4 +244,4 @@ def reserva_equipaje():
 	return render_template("reserva_equipaje.html", form = form)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug = True)

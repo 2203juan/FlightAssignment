@@ -31,7 +31,7 @@
 
 		    <div class="form-group">
 	            {{ form.ciudad_a.label }}
-	            {{ form.ciudad_a(size= 1) }}<br>
+	            {{ form.ciudad_a(size= 64) }}<br>
 	            {% for error in form.ciudad_a.errors %}
 	            <span style="color: red;">{{ error }}</span>
 	            {% endfor %}
@@ -39,7 +39,7 @@
 		    </div>
 		    <div class="form-group">
 	            {{ form.ciudad_b.label }}
-	            {{ form.ciudad_b(size=1) }}<br>
+	            {{ form.ciudad_b(size=64) }}<br>
 	            {% for error in form.ciudad_b.errors %}
 	            <span style="color: red;">{{ error }}</span>
 	            {% endfor %}

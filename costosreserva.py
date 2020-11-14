@@ -3,7 +3,7 @@ def calcular_valor_reserva(ciudad_a, edad, cantidad_personas):
 	descuento = 0 
 
 	# primer descuento posible
-	if ciudad_a == "1" or ciudad_a == "2" or ciudad_a == "3":
+	if ciudad_a == "MEDELLIN" or ciudad_a == "CALI" or ciudad_a == "BOGOTA":
 		descuento += 0.2# si la ciudad de salida es Medellin,Bogota o Cali se descuenta un 20%
 
 	# segundo descuento posible
